@@ -26,19 +26,17 @@ public:
         rent = 0;
     }
 
-    MonopolySpace(string propertyName, string propertyColor, int value, int rent) {
-        /* TODO: Define overloaded constructor here */
-    }
+    MonopolySpace(string propertyName, string propertyColor, int value, int rent):
+        propertyName(propertyName), propertyColor(propertyColor), value(value), rent(rent) {}
 
     bool isEqual(MonopolySpace other) {
-        /* TODO: Define isEqual here (compare by name is fine if you enforce uniqueness) */
+        if (other.propertyName==propertyName && other.propertyColor==propertyColor
+            && other.value==value && other.rent==rent) {return true;}
         return false;
     }
 
     void print() {
-        /* TODO: Define print here */
-        // Example style:
-        // cout << propertyName << " | " << propertyColor << " | $" << value << " | Rent " << rent;
+        cout << propertyName << " | " << propertyColor << " | $" << value << " | Rent " << rent << endl;
     }
 };
 
@@ -104,8 +102,21 @@ public:
         // - If empty list: head=tail=player=new, new->next=head
         // - Else: tail->next=new, tail=new, tail->next=head
         // - nodeCount++
-        cout << "addSpace unwritten" << endl;
-        return false;
+        if (nodeCount==MAX_SPACES){return false;}
+        Node<T>* newNode = new Node<T>(value);
+        if (nodeCount==0) {
+            headNode = newNode;
+            tailNode = newNode;
+            tailNode->nextNode = headNode;
+            playerNode=newNode;
+        }
+        else {
+            tailNode->nextNode = newNode;
+            tailNode = newNode;
+            tailNode->nextNode = headNode;
+        }
+        nodeCount++;
+        return true;
     }
 
     // -------------------------------
@@ -131,7 +142,13 @@ public:
         // - Detect and track passing GO:
         //   increment passGoCount when a move crosses from tail back to head
         // - Must handle empty list safely
-        cout << "movePlayer unwritten" << endl;
+        if (nodeCount==0)
+            return;
+        for (int i=0; i<steps; i++) {
+            if (playerNode->nextNode == headNode)
+                passGoCount++;
+            playerNode = playerNode->nextNode;
+        }
     }
 
     int getPassGoCount() {
@@ -147,6 +164,15 @@ public:
         // - Must not infinite loop
         // - Must handle empty list
         // - Output must be deterministic and readable
+        if (nodeCount==0) {
+            cout<<"Board empty :("<<endl;
+        }
+        Node<T>* temp = playerNode;
+        for (int i=0; i<count; i++) {
+            temp->data.print();
+            temp = temp->nextNode;
+        }
+
         cout << "printFromPlayer unwritten" << endl;
     }
 
@@ -154,7 +180,13 @@ public:
     void printBoardOnce() {
         // TODO:
         // - Traverse exactly one full cycle and print each node
-        cout << "printBoardOnce unwritten" << endl;
+        if (nodeCount==0)
+            cout<<"Board DNE"<<endl;
+        Node<T>* temp = headNode;
+        for (int i=0; i<nodeCount; i++) {
+            temp->data.print();
+            temp = temp->nextNode;
+        }
     }
 
     // -------------------------------
@@ -196,7 +228,26 @@ public:
         // - Preserve circular structure
         // - Correctly handle empty list and single-node list
         // - Player cursor must remain on the same logical space after reversal
-        cout << "mirrorBoard unwritten" << endl;
+
+        //cannot reverse an empty or single node
+        if (nodeCount<=1)
+            return;
+
+        //Main reversal section
+        Node<T>* prevNode = headNode;
+        Node<T>* currentNode = prevNode->nextNode;
+        Node<T>* futureNode = currentNode->nextNode;
+        for (int i=0; i<nodeCount; i++) {
+            currentNode->nextNode = prevNode;
+            prevNode = currentNode;
+            currentNode = futureNode;
+            futureNode = futureNode->nextNode;
+        }
+
+        //flips the head and tail
+        Node<T>* temp = headNode;
+        headNode = tailNode;
+        tailNode = temp;
     }
 
     // -------------------------------
@@ -218,7 +269,13 @@ public:
         // - Safely delete all nodes
         // - Tip: if tailNode exists, break the cycle first: tailNode->nextNode = nullptr
         // - Then delete like a normal singly linked list
-        cout << "clear unwritten" << endl;
+        tailNode->nextNode = nullptr;
+        Node<T> *temp = headNode;
+        while (headNode) {
+            headNode = headNode->nextNode;
+            delete temp;
+            temp = headNode;
+        }
     }
 };
 
@@ -250,6 +307,12 @@ int main() {
     // NOTE: This starter calls addSpace once to show the intended API,
     // but your final submission should build a meaningful board.
     board.addSpace(MonopolySpace("GO", "None", 0, 0));
+    board.addSpace(MonopolySpace("Baltic Avenue", "Brown", 60, 4));
+    board.addSpace(MonopolySpace("St. James Place", "Orange", 180, 16));
+    board.addSpace(MonopolySpace("B. & O. Railroad", "Railroad", 200, 25));
+    board.addSpace(MonopolySpace("Boardwalk", "Blue", 400, 50));
+
+    board.printBoardOnce();
 
     // -------------------------------
     // Playable Traversal Loop
@@ -274,7 +337,12 @@ int main() {
     // vector<string> brownProps = board.findByColor("Brown");
     //
     // Option B example:
-    // board.mirrorBoard();
+    cout << "\nPre-mirror board;"<<endl;
+    board.printBoardOnce();
+    board.mirrorBoard();
+    cout << "\nMirror board:" << endl;
+    board.printBoardOnce();
 
+    board.clear();
     return 0;
 }
