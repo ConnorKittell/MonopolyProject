@@ -24,19 +24,20 @@ Each entry may be one of the following:
 - Why you chose one approach over another (tradeoffs).
 ---
 ### Entry 1
-2026-02-25
-Engineering Decision
-Reversal
-Worked out logic in ______.png and started implementation
-Realized the challenge of keeping the player in the same logical spot
-Implemented playerTracker loop
+**Date:** 2026-02-25
+**Entry Type:** Engineering Decision
+**Task worked on:** Reversal
+**Issue or decision:** Worked out logic in ______.png and started implementation. Realized the challenge of keeping the player in the same logical spot
+**What I tried:** Implemented playerTracker loop
+**Commit(s):**Initial commit
 ---
 ### Entry 2
-2026-03-2
-Bug Fix
-Fix reversal
-Clarified with Manju what "logical spot" ment
-removed playerTracker loop
+**Date:** 2026-03-2
+**Entry Type:** Bug Fix
+**Task worked on:** Fix reversal
+**Issue or decision:** Clarified with Manju what "logical spot" ment
+**What I tried:** removed playerTracker loop
+**Commit(s):**Fixed mirrorBoard, added all monopolySpace requirements, added traversal functionality, added both print methods, added the clear method, initial testing looks good
 ---
 ### Entry 3
 **Date:** YYYY-MM-DD
