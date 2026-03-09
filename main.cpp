@@ -257,8 +257,15 @@ public:
         // TODO:
         // - Must be O(n), traverse exactly once with correct stop condition
         // - Do NOT rely on nodeCount for this method
-        cout << "countSpaces unwritten" << endl;
-        return 0;
+        if (headNode==nullptr)
+            return 0;
+        Node<T>* temp = headNode;
+        int count = 1;
+        while (temp->nextNode!=headNode) {
+            count++;
+            temp=temp->nextNode;
+        }
+        return count;
     }
 
     // -------------------------------
@@ -291,6 +298,8 @@ int main() {
 
     CircularLinkedList<MonopolySpace> board;
 
+    cout<<board.countSpaces()<<endl;
+
     // -------------------------------
     // Board Construction Phase
     // -------------------------------
@@ -311,6 +320,8 @@ int main() {
     board.addSpace(MonopolySpace("St. James Place", "Orange", 180, 16));
     board.addSpace(MonopolySpace("B. & O. Railroad", "Railroad", 200, 25));
     board.addSpace(MonopolySpace("Boardwalk", "Blue", 400, 50));
+
+    cout<<board.countSpaces()<<endl;
 
     board.printBoardOnce();
 
