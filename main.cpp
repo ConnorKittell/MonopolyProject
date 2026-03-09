@@ -128,8 +128,12 @@ public:
         // - Stop exactly when you reach MAX_SPACES
         // - Return number successfully added
         // - Do not corrupt pointers if capacity is exceeded
-        cout << "addMany unwritten" << endl;
-        return 0;
+        int count=0;
+        while (count<values.size()&&nodeCount<MAX_SPACES) {
+            addSpace(values[count]);
+            count++;
+        }
+        return count;
     }
 
     // -------------------------------
@@ -320,7 +324,14 @@ int main() {
     board.addSpace(MonopolySpace("St. James Place", "Orange", 180, 16));
     board.addSpace(MonopolySpace("B. & O. Railroad", "Railroad", 200, 25));
     board.addSpace(MonopolySpace("Boardwalk", "Blue", 400, 50));
-
+    vector<MonopolySpace> spaces = {
+        MonopolySpace("Oriental Avenue", "Light Blue", 120, 6),
+        MonopolySpace("Jail", "None", 0, 0),
+        MonopolySpace("Ventnor Place", "Yellow", 280, 28)
+    };
+    vector<MonopolySpace> spaces1={};
+    cout<<board.addMany(spaces1)<<endl;
+    cout<<board.addMany(spaces)<<endl;
     cout<<board.countSpaces()<<endl;
 
     board.printBoardOnce();

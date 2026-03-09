@@ -40,24 +40,23 @@ Each entry may be one of the following:
 **Commit(s):**Fixed mirrorBoard, added all monopolySpace requirements, added traversal functionality, added both print methods, added the clear method, initial testing looks good
 ---
 ### Entry 3
-**Date:** YYYY-MM-DD
-**Entry Type:** Bug Fix / Edge Case / Engineering Decision
-**Task worked on:**
-**Issue or decision:**
-**Error message / symptom (if applicable):**
-**What I tried:**
-**Fix / resolution (or final decision):**
-**Commit(s):**
+**Date:** 2026-3-8
+**Entry Type:** Bug Fix
+**Task worked on:** Add Many
+**Issue or decision:** Incorrect return value
+**Error message / symptom (if applicable):** Returning three successful adds when only one node was added
+**What I tried:** Printing nodecount and the number of additions revealed that my stop condition was wrong
+**Fix / resolution (or final decision):** swapped the condition from nodeCount<=MAX_SPACES to nodeCount<MAX_SPACES
+**Commit(s):** Added addMany
 ---
 ### Entry 4
-**Date:** YYYY-MM-DD
-**Entry Type:** Bug Fix / Edge Case / Engineering Decision
-**Task worked on:**
-**Issue or decision:**
-**Error message / symptom (if applicable):**
-**What I tried:**
-**Fix / resolution (or final decision):**
-**Commit(s):**
+**Date:** 2026-3-8
+**Entry Type:** Engineering Decision
+**Task worked on:** Add Many
+**Issue or decision:** Decided how to traverse the vector and keep track of how many to return later
+**What I tried:** Split the for loop functionality into several parts with a while loop to keep track of count
+**Fix / resolution (or final decision):** Called addSpace rather than rewrite it to keep the code cleaner
+**Commit(s):** Added addMany
 ---
 ### Entry 5
 **Date:** YYYY-MM-DD
