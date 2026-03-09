@@ -58,6 +58,11 @@ Each entry may be one of the following:
 **Fix / resolution (or final decision):** Called addSpace rather than rewrite it to keep the code cleaner
 **Commit(s):** Added addMany
 ---
+
+
+I didn't run into enough errors to fill in the devlog...
+
+
 ### Entry 5
 **Date:** YYYY-MM-DD
 **Entry Type:** Bug Fix / Edge Case / Engineering Decision
